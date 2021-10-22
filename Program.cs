@@ -76,9 +76,7 @@ namespace HashingAndBST
                     break;
 
             }
-
-            Console.ReadLine();
-
+           Console.ReadLine();
         }
     }
 }
