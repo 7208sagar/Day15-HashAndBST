@@ -6,7 +6,7 @@ namespace HashAndBST
     {
         static void Main(string[] args)
         {
-            Console.WriteLine("******Hello Welcome to Hash & BTS problem******");
+            Console.WriteLine("******Welcome To Hash Master Branch******");
         }
     }
 }
