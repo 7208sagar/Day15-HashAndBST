@@ -7,6 +7,10 @@ using System.Threading.Tasks;
 namespace HashingAndBST
 {
     //Value type Data type KeyValue
+<<<<<<< HEAD
+=======
+    //Value type Data Type KeyValue
+>>>>>>> UC3-RemoveWord
     public struct KeyValue<K, V>
     {
         public K Key { get; set; }
@@ -17,13 +21,24 @@ namespace HashingAndBST
     {
         int size;
         public LinkedList<KeyValue<K, V>>[] items;
+<<<<<<< HEAD
+=======
+
+>>>>>>> UC3-RemoveWord
         public MapNode(int size)
         {
             this.size = size;
             this.items = new LinkedList<KeyValue<K, V>>[size];
+<<<<<<< HEAD
 
         }
 
+=======
+        }
+
+
+
+>>>>>>> UC3-RemoveWord
         public void Add(K key, V value)
         {
             int position = GetArrayPosition(key);
@@ -82,6 +97,29 @@ namespace HashingAndBST
             }
 
         }
+<<<<<<< HEAD
+=======
+        public void Remove(K key)
+        {
+            int position = GetArrayPosition(key);
+            LinkedList<KeyValue<K, V>> linkedList = GetLinkedListPosition(position);
+            bool itemFound = false;
+            KeyValue<K, V> founditem = default(KeyValue<K, V>);
+            foreach (KeyValue<K, V> keyValue in linkedList)
+            {
+                if (keyValue.Key.Equals(key))
+                {
+                    itemFound = true;
+                    founditem = keyValue;
+                }
+            }
+            if (itemFound)
+            {
+                linkedList.Remove(founditem);
+
+            }
+        }
+>>>>>>> UC3-RemoveWord
         //Display Linkedlist elements for particular key
         public void Display(K key)
         {
@@ -96,5 +134,9 @@ namespace HashingAndBST
 
             }
         }
+<<<<<<< HEAD
+=======
+
+>>>>>>> UC3-RemoveWord
     }
 }
