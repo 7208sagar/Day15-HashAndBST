@@ -13,14 +13,6 @@ namespace HashingAndBST
             Console.WriteLine("*********BINARY SEARCH TREE OPERATIONS*********");
             Console.WriteLine("1.Insertion.");
             Console.WriteLine("2.Insert More Elements");
-
-
-
-
-
-
-
-
             Console.WriteLine("Enter the option!!!");
             int num = Convert.ToInt32(Console.ReadLine());
             BST<int> binarySearchTree = new BST<int>(56);
