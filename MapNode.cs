@@ -6,95 +6,68 @@ using System.Threading.Tasks;
 
 namespace HashingAndBST
 {
-    //Value type Data type KeyValue
-    public struct KeyValue<K, V>
+    public class BST<T> where T : IComparable<T>
     {
-        public K Key { get; set; }
-        public V Value { get; set; }
-    };
+        public T nodeData { get; set; }
+        public BST<T> leftTree { get; set; }
 
-    public class MapNode<K, V>
-    {
-        int size;
-        public LinkedList<KeyValue<K, V>>[] items;
-        public MapNode(int size)
+        public BST<T> rightTree { get; set; }
+
+        public BST(T data)
         {
-            this.size = size;
-            this.items = new LinkedList<KeyValue<K, V>>[size];
-
+            this.nodeData = data;
+            this.leftTree = null;
+            this.rightTree = null;
         }
+        int leftCount = 0, rightCount = 0;
 
-        public void Add(K key, V value)
+        public void Insert(T item)
         {
-            int position = GetArrayPosition(key);
-            LinkedList<KeyValue<K, V>> LinkedListofPosition = GetLinkedListPosition(position);
-            KeyValue<K, V> keyValue = new KeyValue<K, V>()
+            T CurrNodeVal = this.nodeData;
+            if ((CurrNodeVal.CompareTo(item)) > 0)
             {
-                Key = key,
-                Value = value
-            };
-            LinkedListofPosition.AddLast(keyValue);
-        }
-
-        //Step 1: Get array position
-        public int GetArrayPosition(K key)
-        {
-            int hashcode = key.GetHashCode();
-            int position = hashcode % size;
-            return Math.Abs(position);
-        }
-
-        //Step 2: Create linkedlist for a particular position
-        public LinkedList<KeyValue<K, V>> GetLinkedListPosition(int position)
-        {
-            if (items[position] == null)
-            {
-                items[position] = new LinkedList<KeyValue<K, V>>();
-            }
-            return items[position];
-        }
-        // Check if element is already Present
-        public int CheckHash(K key)
-        {
-            int position = GetArrayPosition(key);
-            LinkedList<KeyValue<K, V>> LinkedListofPosition = GetLinkedListPosition(position);
-            int count = 1;
-            bool found = false;
-            KeyValue<K, V> founditem = default(KeyValue<K, V>);
-
-            foreach (KeyValue<K, V> keyValue in LinkedListofPosition)
-            {
-                if (keyValue.Key.Equals(key))
+                if (this.leftTree == null)
                 {
-                    count = Convert.ToInt32(keyValue.Value) + 1;
-                    found = true;
-                    founditem = keyValue;
+                    this.leftTree = new BST<T>(item);
                 }
-            }
-            if (found)
-            {
-                LinkedListofPosition.Remove(founditem);
-                return count;
+                else
+                {
+                    this.leftTree.Insert(item);
+                    leftCount++;
+                }
             }
             else
             {
-                return 1;
-            }
-
-        }
-        //Display Linkedlist elements for particular key
-        public void Display(K key)
-        {
-            int position = GetArrayPosition(key);
-            LinkedList<KeyValue<K, V>> LinkedListofPosition = GetLinkedListPosition(position);
-            foreach (KeyValue<K, V> keyValue in LinkedListofPosition)
-            {
-                if (keyValue.Key.Equals(key))
+                if (this.rightTree == null)
                 {
-                    Console.WriteLine("Key: " + keyValue.Key + "\t Value: " + keyValue.Value);
+                    this.rightTree = new BST<T>(item);
                 }
-
+                else
+                {
+                    this.rightTree.Insert(item);
+                    rightCount++;
+                }
             }
         }
+        public void GetSize()
+        {
+            Console.WriteLine("Size " + " " + (1 + this.leftCount + this.rightCount));
+        }
+
+        public void Display()
+        {
+            if (this.leftTree != null)
+            {
+                this.leftCount++;
+                this.leftTree.Display();
+            }
+            Console.WriteLine(this.nodeData.ToString());
+            if (this.rightTree != null)
+            {
+                this.rightCount++;
+                this.rightTree.Display();
+            }
+        }
+
     }
 }
